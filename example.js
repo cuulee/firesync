@@ -15,7 +15,7 @@ var FirebaseChildStream = sync.FirebaseChildStream,
     ref, client, fbEventStream, esBulkStream, logStream;
 
 // create firebase and elasticsearch clients
-ref = new Firebase('https://firenext-test.firebaseio.com/jobs');
+ref = new Firebase('https://mydb.firebaseio.com/jobs');
 client = new elasticsearch.Client({
   host: 'localhost:9200',
   log: 'info'
