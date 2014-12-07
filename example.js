@@ -4,7 +4,7 @@
 
 var elasticsearch = require('elasticsearch'),
     Firebase = require('firebase'),
-    sync = require('.');
+    sync = require('./index');
 
 /*!
  * globals
@@ -12,10 +12,11 @@ var elasticsearch = require('elasticsearch'),
 
 var FirebaseChildStream = sync.FirebaseChildStream,
     ElasticBulkStream = sync.ElasticBulkStream,
+    LogStream = sync.LogStream,
     ref, client, fbEventStream, esBulkStream, logStream;
 
 // create firebase and elasticsearch clients
-ref = new Firebase('https://mydb.firebaseio.com/jobs');
+ref = new Firebase('https://test-db.firebaseio.com/jobs');
 client = new elasticsearch.Client({
   host: 'localhost:9200',
   log: 'info'
