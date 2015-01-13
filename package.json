@@ -1,6 +1,6 @@
 {
   "name": "firesync",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,10 +9,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "elasticsearch": "^2.4.3",
-    "firebase": "^2.0.6"
+    "elasticsearch": "3.1.1",
+    "firebase": "2.1.1"
   },
   "dependencies": {
-    "debug": "^2.1.0"
+    "debug": "2.1.1"
   }
 }
