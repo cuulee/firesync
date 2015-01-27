@@ -29,7 +29,7 @@ client = new elasticsearch.Client({
   log: 'info'
 });
 
-// create data streams
+// create streams
 logStream = new LogStream();
 fbEventStream = new FirebaseChildStream(ref);
 esBulkStream = new ElasticBulkStream(client, {

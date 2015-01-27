@@ -27,7 +27,10 @@ logStream = new LogStream();
 fbEventStream = new FirebaseChildStream(ref);
 esBulkStream = new ElasticBulkStream(client, {
   index: 'firequeue',
-  type: 'job'
+  type: 'job',
+  map: function(child) {
+    return child.val().data;
+  }
 });
 
 // start indexing
