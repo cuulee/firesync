@@ -1,11 +1,8 @@
 {
   "name": "firesync",
-  "version": "0.0.6",
-  "description": "",
+  "version": "0.0.7",
+  "description": "firebase elasticsearch sync stream",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
