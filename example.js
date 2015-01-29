@@ -1,8 +1,11 @@
+/* jshint camelcase: false */
+
 /*!
  * deps
  */
 
 var elasticsearch = require('elasticsearch'),
+    through = require('through2'),
     Firebase = require('firebase'),
     sync = require('./index');
 
@@ -13,7 +16,7 @@ var elasticsearch = require('elasticsearch'),
 var FirebaseChildStream = sync.FirebaseChildStream,
     ElasticBulkStream = sync.ElasticBulkStream,
     LogStream = sync.LogStream,
-    ref, client, fbEventStream, esBulkStream, logStream;
+    ref, client, fbEventStream, esBulkStream;
 
 // create firebase and elasticsearch clients
 ref = new Firebase('https://jogabo-test.firebaseio.com/jobs');
@@ -23,20 +26,36 @@ client = new elasticsearch.Client({
 });
 
 // create data streams
-logStream = new LogStream();
 fbEventStream = new FirebaseChildStream(ref);
 esBulkStream = new ElasticBulkStream(client, {
-  index: 'firequeue',
-  type: 'job',
-  map: function(child) {
-    return child.val().data;
-  }
+  index: 'firequeue'
 });
 
 // start indexing
 fbEventStream
+  .pipe(through.obj(function(chunk, enc, callback) {
+    var op = chunk.op,
+        child = chunk.child;
+    switch(op) {
+      case 'index':
+        return callback(null, [
+          { index: { _id: child.key(), _type: 'firequeue' } },
+          { doc: child.val() }
+        ]);
+      case 'update':
+        return callback(null, [
+          { update: { _id: child.key(), _type: 'firequeue' } },
+          { doc: child.val(), doc_as_upsert: true }]);
+      case 'remove':
+        return callback(null, [
+          { delete: { _id: child.key(), _type: 'firequeue'  } }
+        ]);
+      default:
+        callback(new Error('invalid operation ' + op));
+    }
+  }))
   .pipe(esBulkStream)
-  .pipe(logStream);
+  .pipe(new LogStream());
 
 // reset
 // curl -XDELETE http://localhost:9200/firequeue
