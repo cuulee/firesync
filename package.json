@@ -1,6 +1,6 @@
 {
   "name": "firesync",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "firebase elasticsearch sync stream",
   "main": "index.js",
   "author": "",
