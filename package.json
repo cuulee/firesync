@@ -1,10 +1,10 @@
 {
   "name": "firesync",
-   "repository": {
-      "type": "git",
-      "url": "https://github.com/jogabo/firesync.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jogabo/firesync.git"
   },
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "firebase elasticsearch sync stream",
   "main": "index.js",
   "author": "",
