@@ -4,6 +4,10 @@
     "type": "git",
     "url": "https://github.com/jogabo/firesync.git"
   },
+  "scripts": {
+    "lint": "jshint --reporter node_modules/jshint-stylish/stylish.js lib/*.js",
+    "prepublish": "npm run lint"
+  },
   "version": "2.0.1",
   "description": "firebase elasticsearch sync stream",
   "main": "index.js",
@@ -12,6 +16,7 @@
   "devDependencies": {
     "elasticsearch": "3.1.3",
     "firenext": "3.1.0",
+    "jshint": "^2.8.0",
     "jshint-stylish": "1.0.1",
     "through2": "0.6.3"
   },

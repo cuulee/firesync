@@ -64,6 +64,11 @@ fbEventStream
   .pipe(esBulkStream)
   .pipe(new LogStream());
 
+
+setTimeout(function() {
+  console.log('destroy');
+  fbEventStream.destroy();
+}, 5000)
 // example 2
 // stream from firebaseReadStream
 // print to console
